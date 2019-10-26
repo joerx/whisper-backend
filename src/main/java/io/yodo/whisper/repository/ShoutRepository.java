@@ -11,9 +11,9 @@ public interface ShoutRepository {
 
     Shout findById(int id);
 
-    void create(Shout shout);
+    Shout create(Shout shout);
 
-    void update(Shout shout);
+    Shout update(Shout shout);
 
-    void delete(Shout shout);
+    Shout delete(Shout shout);
 }

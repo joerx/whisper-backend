@@ -3,6 +3,7 @@ package io.yodo.whisper.service;
 import io.yodo.whisper.entity.Shout;
 import io.yodo.whisper.error.NoSuchEntityException;
 import io.yodo.whisper.repository.ShoutRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +14,7 @@ public class ShoutServiceImpl implements ShoutService {
 
     private final ShoutRepository repo;
 
-    public ShoutServiceImpl(ShoutRepository repo) {
+    public ShoutServiceImpl(@Qualifier("jpaShoutRepo") ShoutRepository repo) {
         this.repo = repo;
     }
 
@@ -33,24 +34,21 @@ public class ShoutServiceImpl implements ShoutService {
     @Transactional
     public Shout create(Shout shout) {
         shout.setId(0);
-        repo.create(shout);
-        return shout;
+        return repo.create(shout);
     }
 
     @Override
     @Transactional
     public Shout update(int id, Shout shout) {
         mustFindShout(id);
-        repo.update(shout);
-        return shout;
+        return repo.update(shout);
     }
 
     @Override
     @Transactional
     public Shout deleteById(int id) {
         Shout shout = mustFindShout(id);
-        repo.delete(shout);
-        return shout;
+        return repo.delete(shout);
     }
 
     private Shout mustFindShout(int id) {

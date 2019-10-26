@@ -11,13 +11,13 @@ import java.util.List;
 
 @Repository
 @Qualifier("jpaShoutRepo")
-public class ShoutRepositoryJPAImpl implements ShoutRepository {
+public class ShoutRepositoryJpaImpl implements ShoutRepository {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private final EntityManager entityManager;
 
-    public ShoutRepositoryJPAImpl(EntityManager entityManager) {
+    public ShoutRepositoryJpaImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 

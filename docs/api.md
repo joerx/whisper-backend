@@ -4,19 +4,21 @@
 
 -- Lao Tse
 
-## List Shouts
+## Shouts
+
+### List
 
 ```sh
 curl localhost:9090/shouts
 ```
 
-## Get Shout
+### Get
 
 ```sh
 curl localhost:9090/shouts/1
 ```
 
-## Create Shout
+### Create
 
 ```sh
 curl -XPOST http://localhost:9090/shouts \
@@ -24,7 +26,7 @@ curl -XPOST http://localhost:9090/shouts \
     -d'{"message": "a longer shout", "username": "joerx"}'
 ```
 
-## Put Shout
+### Put
 
 ```sh
 curl -XPUT http://localhost:9090/shouts/5 \
@@ -32,7 +34,7 @@ curl -XPUT http://localhost:9090/shouts/5 \
     -d'{"message": "_a fancy shout_", "username": "joerx"}'
 ```
 
-## Delete Shout
+### Delete
 
 ```sh
 curl -XDELETE http://localhost:9090/shouts/4

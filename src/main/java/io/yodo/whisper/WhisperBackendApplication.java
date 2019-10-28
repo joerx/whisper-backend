@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WhisperApplication {
+public class WhisperBackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WhisperApplication.class, args);
+		SpringApplication.run(WhisperBackendApplication.class, args);
 	}
 
 }

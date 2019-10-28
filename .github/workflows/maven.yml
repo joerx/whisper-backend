@@ -11,4 +11,4 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - run: mvn -version
-      - run: mvn clean package
+      - run: mvn --no-transfer-progress clean package -Dmaven.test.skip=true

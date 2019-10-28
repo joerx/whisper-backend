@@ -5,9 +5,9 @@ on: [push]
 jobs:
   build:
     name: Hello
-      runs-on: ubuntu-18.04
-      steps:
-        - name: debug
-          run: |
-            java -version
-            mvn -version
+    runs-on: ubuntu-18.04
+    steps:
+      - name: debug
+        run: |
+          java -version
+          mvn -version

@@ -11,3 +11,4 @@ jobs:
         run: |
           java -version
           mvn -version
+          ls -l /usr/lib/jvm/

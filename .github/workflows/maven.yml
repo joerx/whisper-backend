@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    name: Hello
+    name: Build and publish
     runs-on: ubuntu-18.04
     env:
       JAVA_HOME: /usr/lib/jvm/zulu-12-azure-amd64

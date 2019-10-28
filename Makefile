@@ -1,4 +1,4 @@
-DOCKER_TAG ?= $(shell git rev-parse --short HEAD)
+DOCKER_TAG ?= latest
 DOCKER_PREFIX ?= quay.io/yodo-io
 PROJECT := whisper-backend
 

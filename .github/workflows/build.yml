@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-18.04
     env:
       JAVA_HOME: /usr/lib/jvm/zulu-12-azure-amd64
+      GIT_REF: ${{ github.ref }}
     steps:
       - uses: actions/checkout@v1
       - uses: azure/docker-login@v1

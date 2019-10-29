@@ -2,19 +2,27 @@
 
 A considerate microblogging-api built with Springboot. Backend application.
 
-## Setup
+## Installation
+
+### Setup
 
 - Make Postgres run
-- Create a new database
+- Create a new database, for example `whisper`
 - Import [schema.sql](./src/main/resources/schema.sql)
 
-## Configuration
+### Environment
 
 ```sh
 DATASOURCE_URL=jdbc:postgresql://postgres:5432/whisper
 DATASOURCE_USERNAME=postgres
 DATASOURCE_PASSWORD=postgres
 SERVER_PORT=9090
+```
+
+### Running It
+
+```sh
+./mvnw spring-boot:run
 ```
 
 ## Docker

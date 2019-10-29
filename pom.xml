@@ -11,7 +11,7 @@
 	</parent>
 
 	<groupId>io.yodo</groupId>
-	<artifactId>whisper</artifactId>
+	<artifactId>whisper-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<name>whisper-backend</name>

@@ -8,10 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AndRequestMatcher;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
-import org.springframework.security.web.util.matcher.RequestMatcher;
+import org.springframework.security.web.util.matcher.*;
 
 @Configuration
 @EnableWebSecurity
@@ -19,7 +16,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final RequestMatcher secureURLs = new AndRequestMatcher(
             new AntPathRequestMatcher("/**"),
-            new NegatedRequestMatcher(new AntPathRequestMatcher("/actuator/**"))
+            new NegatedRequestMatcher(new OrRequestMatcher(
+                new AntPathRequestMatcher("/actuator/**"),
+                new AntPathRequestMatcher("/token")
+            ))
     );
 
     @Override

@@ -1,7 +1,6 @@
 package io.yodo.whisper.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
 import io.yodo.whisper.error.ErrorResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-import javax.activation.MimeType;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +26,7 @@ public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFil
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws AuthenticationException, IOException {
+    public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws AuthenticationException {
         log.debug("Attempting authentication");
 
         String tokenHeader = httpServletRequest.getHeader("Authorization");
@@ -36,7 +34,7 @@ public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFil
         if (tokenHeader == null) {
             throw new InvalidAuthenticationException("No token found in request");
         }
-        if (!tokenHeader.matches("^Bearer\\s\\w+")) {
+        if (!tokenHeader.matches("^Bearer\\s[.\\-\\w]+")) {
             throw new InvalidAuthenticationException("Invalid format for auth header");
         }
 
@@ -55,7 +53,7 @@ public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFil
     }
 
     @Override
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException {
         log.debug("Authentication failed: " + failed.getMessage());
         SecurityContextHolder.clearContext();
 

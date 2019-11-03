@@ -1,6 +1,7 @@
 package io.yodo.whisper.endpoint;
 
 import io.yodo.whisper.error.ErrorResponse;
+import io.yodo.whisper.error.InvalidRequestException;
 import io.yodo.whisper.error.NoSuchEntityException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class ErrorHandler {
     }
 
     @ExceptionHandler
-    public ResponseEntity<ErrorResponse> handleError(IllegalArgumentException e) {
+    public ResponseEntity<ErrorResponse> handleError(InvalidRequestException e) {
         return createResponse(e, HttpStatus.BAD_REQUEST);
     }
 

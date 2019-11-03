@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +52,7 @@ public class JWTAuthenticationProvider implements AuthenticationProvider {
         log.debug("Token decoded OK");
 
         String username = dec.getClaim("name").asString();
+
         List<String> scopes = dec.getClaim("scope").asList(String.class);
         Set<GrantedAuthority> authorities =  scopes.stream().map(s ->
                 new SimpleGrantedAuthority("SCOPE_"+s))

@@ -3,7 +3,7 @@ package io.yodo.whisper.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @SuppressWarnings("unused")
-public class TokenRequest {
+public class ClientCredentials {
 
     @JsonProperty("client_id")
     private String clientId;

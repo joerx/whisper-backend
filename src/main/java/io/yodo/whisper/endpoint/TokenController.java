@@ -1,59 +1,38 @@
 package io.yodo.whisper.endpoint;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
-import io.yodo.whisper.entity.TokenRequest;
+import io.yodo.whisper.entity.ClientCredentials;
 import io.yodo.whisper.entity.TokenResponse;
 import io.yodo.whisper.error.InvalidRequestException;
-import io.yodo.whisper.security.JWTConfig;
+import io.yodo.whisper.security.JWTTokenHelper;
+import io.yodo.whisper.service.ClientCredentialService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Map;
-
 @RestController
 public class TokenController {
 
-    private final String jwtSecret;
+    private final Logger log = LoggerFactory.getLogger(getClass());
+    private final JWTTokenHelper tokenHelper;
+    private final ClientCredentialService clientCredentialService;
 
-    private final String jwtIssuer;
-
-    private final Map<String, String> clients;
-
-    public TokenController(JWTConfig config) {
-        this.jwtSecret = config.getSecret();
-        this.jwtIssuer = config.getIssuer();
-        this.clients = config.getClients();
+    public TokenController(JWTTokenHelper tokenHelper, ClientCredentialService clientCredentialService) {
+        this.tokenHelper = tokenHelper;
+        this.clientCredentialService = clientCredentialService;
     }
 
     @PostMapping("/token")
-    public TokenResponse getToken(@RequestBody TokenRequest req) {
+    public TokenResponse getToken(@RequestBody ClientCredentials cc) {
         // our custom error handler will map InvalidRequestException to a 400 Bad Request response
-        if (!clients.containsKey(req.getClientId())) {
-            throw new InvalidRequestException("Invalid client id or secret");
-        }
-        if (!clients.get(req.getClientId()).equals(req.getClientSecret())) {
-            throw new InvalidRequestException("Invalid client id or secret");
+        if (!clientCredentialService.isValidClient(cc.getClientId(), cc.getClientSecret())) {
+            throw new InvalidRequestException("Invalid client credentials");
         }
 
-        // calculate expiry date 1 hour from now
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.HOUR, 1);
-        Date exp = cal.getTime();
+        log.debug("client is valid, issuing token");
 
-        // issue JWT
-        Algorithm algo = Algorithm.HMAC256(jwtSecret);
-        String token = JWT.create()
-                .withIssuer(jwtIssuer)
-                .withClaim("name", req.getClientId())
-                .withArrayClaim("scope", new String[]{"user", "admin"})
-                .withNotBefore(new Date())
-                .withExpiresAt(exp)
-                .sign(algo);
-
+        String token = tokenHelper.issueToken(cc.getClientId());
         return new TokenResponse(token);
     }
 }

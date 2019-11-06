@@ -4,6 +4,9 @@ import io.yodo.whisper.entity.Shout;
 import io.yodo.whisper.error.NoSuchEntityException;
 import io.yodo.whisper.repository.ShoutRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +23,8 @@ public class ShoutServiceImpl implements ShoutService {
 
     @Override
     @Transactional
-    public List<Shout> findAll() {
-        return repo.findAll();
+    public Page<Shout> findAll(PageRequest pr) {
+        return repo.findAll(pr);
     }
 
     @Override

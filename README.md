@@ -6,9 +6,10 @@ A considerate microblogging-api built with Springboot. Backend application.
 
 ### Setup
 
-- Make Postgres run
+- Get Postgres up and running
 - Create a new database, for example `whisper`
 - Import [schema.sql](./src/main/resources/schema.sql)
+- Use [whisper-compose](https://github.com/joerx/whisper-compose/) to get the full stack running quickly 
 
 ### Environment
 
@@ -16,13 +17,22 @@ A considerate microblogging-api built with Springboot. Backend application.
 DATASOURCE_URL=jdbc:postgresql://postgres:5432/whisper
 DATASOURCE_USERNAME=postgres
 DATASOURCE_PASSWORD=postgres
-SERVER_PORT=9090
+SERVER_PORT=9092
 ```
 
 ### Running It
 
+- If you're using whisper-compose, use a different port:
+
 ```sh
-./mvnw spring-boot:run
+$ SERVER_PORT=9092 ./mvnw spring-boot:run
+```
+
+- Test health check endpoint
+
+```sh
+$ curl localhost:9092/actuator/health && echo
+{"status":"UP"}
 ```
 
 ## Docker
@@ -32,11 +42,8 @@ SERVER_PORT=9090
 - Using a simple Makefile instead:
 
 ```sh
-# Build
-make clean docker-build
-
-# Push
-make clean docker-push
+$ make clean docker-build
+$ make clean docker-push
 ```
 
 ## API Usage

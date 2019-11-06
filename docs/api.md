@@ -4,38 +4,54 @@
 
 -- Lao Tse
 
+## Auth
+
+Token is required for all requests, except the token API itself and some management endpoints. To get a token:
+
+```sh
+$ curl -XPOST localhost:9092/token -d'{"client_id": "12345", "client_secret": "hellosecret"}' -H"Content-type: application/json"
+```
+
+Using `jq`:
+
+```sh
+$ TOKEN= $(curl -XPOST localhost:9092/token -d'{"client_id": "12345", "client_secret": "hellosecret"}' -H"Content-type: application/json" | jq -r '.token') 
+```
+
 ## Shouts
 
-### List
+List shouts:
 
 ```sh
-curl localhost:9090/shouts
+$ curl -H"Authorization: Bearer $TOKEN" localhost:9090/shouts
 ```
 
-### Get
+Get shout by id:
 
 ```sh
-curl localhost:9090/shouts/1
+curl -H"Authorization: Bearer $TOKEN" localhost:9090/shouts/1
 ```
 
-### Create
+Create new shout:
 
 ```sh
 curl -XPOST http://localhost:9090/shouts \
-    -H'Content-type: application/json' \
-    -d'{"message": "a longer shout", "username": "joerx"}'
+    -H"Authorization: Bearer $TOKEN" \
+    -H"Content-type: application/json" \
+    -d'{"message": "a longer shout", "username": "john"}'
 ```
 
-### Put
+Update (replace) shout:
 
 ```sh
 curl -XPUT http://localhost:9090/shouts/5 \
-    -H'Content-type: application/json' \
+    -H"Authorization: Bearer $TOKEN" \
+    -H"Content-type: application/json" \
     -d'{"message": "_a fancy shout_", "username": "joerx"}'
 ```
 
-### Delete
+Delete shout:
 
 ```sh
-curl -XDELETE http://localhost:9090/shouts/4
+curl -H"Authorization: Bearer $TOKEN" -XDELETE http://localhost:9090/shouts/4
 ```

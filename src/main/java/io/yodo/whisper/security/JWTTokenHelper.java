@@ -33,7 +33,7 @@ public class JWTTokenHelper {
     }
 
     private User mapClaims(DecodedJWT dec) {
-        if (dec.getClaim("username").isNull()) {
+        if (dec.getClaim("name").isNull()) {
             throw new InvalidAuthenticationException("Missing claim 'name'");
         }
 

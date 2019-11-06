@@ -1,7 +1,11 @@
 package io.yodo.whisper.endpoint;
 
+import io.yodo.whisper.entity.PageResponse;
 import io.yodo.whisper.entity.Shout;
 import io.yodo.whisper.service.ShoutService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,15 +13,23 @@ import java.util.List;
 @RestController
 public class ShoutController {
 
+    private final int pageSize;
+
     private final ShoutService shoutService;
 
-    public ShoutController(ShoutService shoutService) {
+    public ShoutController(
+            @Value("${paging.pageSize}") int pageSize,
+            ShoutService shoutService
+    ) {
+        this.pageSize = pageSize;
         this.shoutService = shoutService;
     }
 
     @GetMapping("/shouts")
-    public List<Shout> getShouts() {
-        return shoutService.findAll();
+    public PageResponse<Shout> getShouts(@RequestParam(defaultValue = "1") int p) {
+        PageRequest pr = PageRequest.of(p - 1, pageSize);
+        Page<Shout> shouts = shoutService.findAll(pr);
+        return PageResponse.from(shouts);
     }
 
     @GetMapping("/shouts/{id}")

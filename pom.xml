@@ -19,7 +19,6 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<docker.image.prefix>quay.io/yodo-io</docker.image.prefix>
 	</properties>
 
 	<dependencies>
@@ -50,6 +49,13 @@
 			<groupId>com.auth0</groupId>
 			<artifactId>java-jwt</artifactId>
 			<version>3.8.3</version>
+		</dependency>
+
+		<!-- Whisper commons -->
+		<dependency>
+			<groupId>io.yodo</groupId>
+			<artifactId>whisper-commons</artifactId>
+			<version>1.0.1</version>
 		</dependency>
 
 		<dependency>
@@ -102,4 +108,10 @@
 		</plugins>
 	</build>
 
+	<repositories>
+		<repository>
+			<id>bintray-joerx-whisper</id>
+			<url>https://dl.bintray.com/joerx/whisper</url>
+		</repository>
+	</repositories>
 </project>

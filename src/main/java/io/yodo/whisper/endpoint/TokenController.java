@@ -1,9 +1,9 @@
 package io.yodo.whisper.endpoint;
 
+import io.yodo.whisper.commons.security.jwt.JWTTokenHelper;
 import io.yodo.whisper.entity.ClientCredentials;
 import io.yodo.whisper.entity.TokenResponse;
 import io.yodo.whisper.error.InvalidRequestException;
-import io.yodo.whisper.security.JWTTokenHelper;
 import io.yodo.whisper.service.ClientCredentialService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -15,7 +15,7 @@ $ curl -XPOST localhost:9091/token -d'{"client_id": "12345", "client_secret": "h
 Using `jq`:
 
 ```sh
-$ TOKEN= $(curl -XPOST localhost:9091/token -d'{"client_id": "12345", "client_secret": "hellosecret"}' -H"Content-type: application/json" | jq -r '.token') 
+$ TOKEN=$(curl -XPOST localhost:9091/token -d'{"client_id": "12345", "client_secret": "hellosecret"}' -H"Content-type: application/json" | jq -r '.token') 
 ```
 
 ## Shouts

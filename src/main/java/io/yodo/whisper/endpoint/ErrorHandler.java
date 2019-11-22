@@ -1,8 +1,8 @@
 package io.yodo.whisper.endpoint;
 
-import io.yodo.whisper.error.ErrorResponse;
-import io.yodo.whisper.error.InvalidRequestException;
-import io.yodo.whisper.error.NoSuchEntityException;
+import io.yodo.whisper.commons.web.error.ErrorResponse;
+import io.yodo.whisper.commons.web.error.InvalidRequestException;
+import io.yodo.whisper.commons.web.error.NoSuchEntityException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

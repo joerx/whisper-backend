@@ -1,16 +1,13 @@
 package io.yodo.whisper.service;
 
+import io.yodo.whisper.commons.web.error.NoSuchEntityException;
 import io.yodo.whisper.entity.Shout;
-import io.yodo.whisper.error.NoSuchEntityException;
 import io.yodo.whisper.repository.ShoutRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 public class ShoutServiceImpl implements ShoutService {

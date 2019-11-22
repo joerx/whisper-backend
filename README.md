@@ -48,4 +48,4 @@ $ make clean docker-push
 
 ## API Usage
 
-See [docs/api.md](./docs/api.md)
+See [API Docs](https://github.com/joerx/wiki/blob/master/whisper/api.md)

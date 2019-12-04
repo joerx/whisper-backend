@@ -48,7 +48,7 @@
 		<dependency>
 			<groupId>io.yodo</groupId>
 			<artifactId>whisper-commons</artifactId>
-			<version>0.4.1</version>
+			<version>0.6.1</version>
 		</dependency>
 
 		<dependency>
@@ -103,8 +103,9 @@
 
 	<repositories>
 		<repository>
-			<id>bintray-joerx-whisper</id>
-			<url>https://dl.bintray.com/joerx/whisper</url>
+			<id>github</id>
+			<url>https://maven.pkg.github.com/joerx/whisper-commons</url>
 		</repository>
 	</repositories>
+
 </project>

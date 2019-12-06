@@ -60,4 +60,11 @@ public class JPAShoutRepositoryImpl implements ShoutRepository {
         entityManager.remove(shout);
         return shout;
     }
+
+    @Override
+    public long countAll() {
+        return entityManager
+                .createQuery("select count(s) from Shout s", Long.class)
+                .getSingleResult();
+    }
 }

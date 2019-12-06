@@ -15,8 +15,9 @@ public interface ShoutService {
 
     Shout create(Shout shout);
 
-    @Transactional
     Shout update(int id, Shout shout);
 
     Shout deleteById(int shoutId);
+
+    long countAll();
 }

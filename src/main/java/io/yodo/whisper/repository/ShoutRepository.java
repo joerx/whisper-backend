@@ -18,4 +18,6 @@ public interface ShoutRepository {
     Shout update(Shout shout);
 
     Shout delete(Shout shout);
+
+    long countAll();
 }

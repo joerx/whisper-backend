@@ -51,6 +51,12 @@ public class ShoutServiceImpl implements ShoutService {
         return repo.delete(shout);
     }
 
+    @Override
+    @Transactional
+    public long countAll() {
+        return repo.countAll();
+    }
+
     private Shout mustFindShout(int id) {
         Shout shout = repo.findById(id);
         if (shout == null) {
